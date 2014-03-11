@@ -58,7 +58,9 @@
     // form fields are separated by an ampersand. Note the absence of a
     // leading ampersand.
     NSString *bodyData = @"name=Jane+Doe&address=123+Main+St";
-    
+    //encode url
+    bodyData = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)bodyData, NULL, CFSTR(":/?#[]@!$ '()*+,;\"<>%{}|\\^~`"), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+
     NSMutableURLRequest *postRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.googleapis.com/"]];
     
     // Set the request's content type to application/x-www-form-urlencoded
